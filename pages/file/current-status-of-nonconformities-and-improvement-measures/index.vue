@@ -8,10 +8,11 @@
       dense
       clearable
       flat
-      hint="2,000 문서 검색됨"
+      messages="2,000 문서 검색됨"
       outlined
       placeholder="검색어를 입력하십시오"
       prepend-inner-icon="fa-search"
+      full-width
     />
 
     <!-- 게시판 시작 -->

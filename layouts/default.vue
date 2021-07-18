@@ -17,8 +17,30 @@
     </v-navigation-drawer>
     <v-app-bar clipped-left fixed app dense>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+
+      <!-- 홈페이지 제목 -->
       <v-toolbar-title v-text="title" />
+
       <v-spacer />
+
+      <!-- 통합 검색창 -->
+      <v-toolbar-items>
+        <v-text-field
+          class="mt-1"
+          autofocus
+          dense
+          clearable
+          outlined
+          full-width
+          single-line
+          placeholder="문서 통합검색"
+          prepend-inner-icon="fa-search"
+        />
+      </v-toolbar-items>
+
+      <v-spacer />
+
+      <!-- 로그 아웃 -->
       <v-btn depressed to="/login">
         <v-icon class="pr-2">fa-sign-out-alt</v-icon>로그아웃
       </v-btn>
