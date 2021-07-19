@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 슬라이드 쇼 시작 -->
-    <v-carousel v-model="model">
+    <v-carousel>
       <v-carousel-item
         v-for="(item, index) in slides"
         :key="index"
