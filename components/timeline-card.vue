@@ -62,7 +62,8 @@
 
     <!-- 이미지란 시작 -->
     <v-row dense class="mb-3 pr-2 pl-2">
-      <v-img src="/img/bg.png" max-width="400" />
+      <v-img src="/img/1.jpeg" max-width="400" />
+      <v-img src="/img/2.jpeg" max-width="400" />
     </v-row>
     <!-- 이미지란 종료 -->
 
