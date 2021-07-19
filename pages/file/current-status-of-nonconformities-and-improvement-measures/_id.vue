@@ -17,7 +17,7 @@
 import timelineCard from '@/components/timeline-card.vue'
 import timelineCalc from '@/components/timeline-calc.vue'
 export default {
-  components: [{ timelineCard }, { timelineCalc }],
+  components: { timelineCard, timelineCalc },
   validate({ params }) {
     return /^\d+$/.test(params.id)
   },

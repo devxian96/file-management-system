@@ -27,7 +27,16 @@
     <v-card-text>
       <v-list dense>
         <v-list-item color="accent">
-          <v-list-item-title> 검사일자 </v-list-item-title>
+          <v-list-item-title> 불량현황 </v-list-item-title>
+          <v-list-item-subtitle>
+            <v-chip class="ma-2" color="red" small label text-color="white">
+              <v-icon left> fa-info </v-icon>
+              미결
+            </v-chip>
+          </v-list-item-subtitle>
+        </v-list-item>
+        <v-list-item color="accent">
+          <v-list-item-title> 발생일자 </v-list-item-title>
           <v-list-item-subtitle>
             {{ new Date().toLocaleString() }}
           </v-list-item-subtitle>
@@ -35,6 +44,10 @@
         <v-list-item>
           <v-list-item-title> 고객사 </v-list-item-title>
           <v-list-item-subtitle> 유한정밀 </v-list-item-subtitle>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-title> 관리번호 </v-list-item-title>
+          <v-list-item-subtitle> UK-07-30008 </v-list-item-subtitle>
         </v-list-item>
         <v-list-item color="accent">
           <v-list-item-title> 귀책부서 </v-list-item-title>
@@ -81,6 +94,9 @@
           <v-btn depressed color="transparent" width="100%"
             >수정기록 확인</v-btn
           >
+        </v-col>
+        <v-col>
+          <v-btn depressed color="transparent" width="100%">공유</v-btn>
         </v-col>
       </v-row>
     </v-card-actions>
