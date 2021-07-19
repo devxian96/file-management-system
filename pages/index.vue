@@ -16,6 +16,8 @@
     </v-carousel>
     <!-- 슬라이드 쇼 종료 -->
 
+    <!-- 여기다가 주석을 써보자 hello-->
+
     <v-divider class="mt-5 mb-5" />
 
     <v-row>
