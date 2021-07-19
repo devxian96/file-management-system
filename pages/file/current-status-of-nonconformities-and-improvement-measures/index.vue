@@ -26,7 +26,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
+          <tr
+            v-for="item in desserts"
+            :key="item.name"
+            @click="
+              $router.push(
+                '/file/current-status-of-nonconformities-and-improvement-measures/1'
+              )
+            "
+          >
             <td>{{ item.name }}</td>
             <td class="text-right">{{ item.date }}</td>
             <td class="text-right">{{ item.date }}</td>
@@ -58,43 +66,43 @@ export default {
       desserts: [
         {
           name: 'Frozen Yogurt',
-          date: 159,
+          date: new Date().toLocaleString(),
         },
         {
           name: 'Ice cream sandwich',
-          date: 237,
+          date: new Date().toLocaleString(),
         },
         {
           name: 'Eclair',
-          date: 262,
+          date: new Date().toLocaleString(),
         },
         {
           name: 'Cupcake',
-          date: 305,
+          date: new Date().toLocaleString(),
         },
         {
           name: 'Gingerbread',
-          date: 356,
+          date: new Date().toLocaleString(),
         },
         {
           name: 'Jelly bean',
-          date: 375,
+          date: new Date().toLocaleString(),
         },
         {
           name: 'Lollipop',
-          date: 392,
+          date: new Date().toLocaleString(),
         },
         {
           name: 'Honeycomb',
-          date: 408,
+          date: new Date().toLocaleString(),
         },
         {
           name: 'Donut',
-          date: 452,
+          date: new Date().toLocaleString(),
         },
         {
           name: 'KitKat',
-          date: 518,
+          date: new Date().toLocaleString(),
         },
       ],
     }

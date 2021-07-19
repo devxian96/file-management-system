@@ -64,10 +64,6 @@ export default {
           to: '/',
         },
         {
-          title: '출하검사 이력 카드',
-          to: '/file/shipment-inspection-history-card',
-        },
-        {
           title: '부적합 발생 및 개선대책 현황',
           to: '/file/current-status-of-nonconformities-and-improvement-measures',
         },
