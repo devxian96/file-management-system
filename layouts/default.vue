@@ -15,7 +15,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar clipped-left fixed app dense>
+    <v-app-bar clipped-left fixed app dense class="menu-z-index">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
       <!-- 홈페이지 제목 -->
@@ -77,3 +77,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.menu-z-index {
+  z-index: 6;
+}
+</style>

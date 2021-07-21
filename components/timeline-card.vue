@@ -75,8 +75,7 @@
 
     <!-- 이미지란 시작 -->
     <v-row dense class="mb-3 pr-2 pl-2">
-      <v-img src="/img/1.jpeg" max-width="400" />
-      <v-img src="/img/2.jpeg" max-width="400" />
+      <facebook-style-img :imgs="imgs" />
     </v-row>
     <!-- 이미지란 종료 -->
 
@@ -105,7 +104,15 @@
 </template>
 
 <script>
-export default {}
+import facebookStyleImg from '@/components/widget/facebook-style-img.vue'
+export default {
+  components: { facebookStyleImg },
+  data() {
+    return {
+      imgs: ['/img/1.jpeg', '/img/2.jpeg', '/img/2.jpeg', '/img/2.jpeg'],
+    }
+  },
+}
 </script>
 
 <style scoped>
