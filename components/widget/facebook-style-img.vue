@@ -85,7 +85,12 @@
           </v-btn>
         </div>
         <v-row dense class="w-100">
-          <v-carousel continuous hide-delimiters height="100%">
+          <v-carousel
+            continuous
+            hide-delimiters
+            height="100%"
+            @change="page = $event"
+          >
             <v-carousel-item v-for="(src, index) in imgs" :key="index">
               <v-img
                 :src="src"
@@ -99,6 +104,7 @@
             </v-carousel-item>
           </v-carousel>
         </v-row>
+        <div class="text-right">{{ page + 1 }} / {{ len }}</div>
       </v-overlay>
     </template>
   </div>
@@ -119,7 +125,15 @@ export default {
       len: this.imgs.length,
       maxHeight: 500,
       overlay: '',
+      page: 0,
     }
+  },
+  watch: {
+    page() {
+      if (this.page > this.len) {
+        this.page = 1
+      }
+    },
   },
 }
 </script>
