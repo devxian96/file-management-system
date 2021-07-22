@@ -119,10 +119,12 @@
                     </thead>
                     <tbody>
                       <tr v-for="item in editLog" :key="item.name">
-                        <td>{{ item.name }}({{ item.id }})</td>
-                        <td>{{ item.before }}</td>
-                        <td>{{ item.after }}</td>
-                        <td>{{ item.updatedAt }}</td>
+                        <td class="text-left">
+                          {{ item.name }}({{ item.id }})
+                        </td>
+                        <td class="text-center">{{ item.before }}</td>
+                        <td class="text-center">{{ item.after }}</td>
+                        <td class="text-right">{{ item.updatedAt }}</td>
                       </tr>
                     </tbody>
                   </template>
@@ -139,7 +141,24 @@
           <!-- 수정기록 확인 종료 -->
         </v-col>
         <v-col>
-          <v-btn depressed color="transparent" width="100%">공유</v-btn>
+          <!-- 공유 기능 시작 -->
+          <v-btn
+            depressed
+            color="transparent"
+            width="100%"
+            @click="copyClipBoard()"
+            >공유</v-btn
+          >
+          <v-snackbar v-model="snackbar" shaped>
+            <v-icon color="success" class="mr-2">fa-check-circle</v-icon>링크를
+            클립보드에 복사했습니다.
+            <template #action="{ attrs }">
+              <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+                닫기
+              </v-btn>
+            </template>
+          </v-snackbar>
+          <!-- 공유 기능 종료 -->
         </v-col>
       </v-row>
     </v-card-actions>
@@ -162,6 +181,7 @@ export default {
   components: { facebookStyleImg },
   data() {
     return {
+      snackbar: false,
       open: false,
       imgs: ['/img/1.jpeg', '/img/2.jpeg', '/img/2.jpeg', '/img/2.jpeg'],
       editLog: [
@@ -202,6 +222,12 @@ export default {
         },
       ],
     }
+  },
+  methods: {
+    copyClipBoard() {
+      this.snackbar = true
+      navigator.clipboard.writeText(this.$route.path)
+    },
   },
 }
 </script>
