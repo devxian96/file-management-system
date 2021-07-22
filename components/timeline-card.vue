@@ -85,13 +85,65 @@
     <v-card-actions>
       <v-row dense>
         <v-col>
-          <v-btn depressed color="transparent" width="100%"
-            >발생원인 및 개선대책 현황 작성</v-btn
-          >
+          <!-- 발생원인 및 개선대책 현황 작성 시작 -->
+          <v-dialog v-model="openReason" width="600px">
+            <template #activator="{ on, attrs }">
+              <v-btn
+                depressed
+                color="transparent"
+                width="100%"
+                v-bind="attrs"
+                v-on="on"
+                >발생원인 및 개선대책 현황 작성</v-btn
+              >
+            </template>
+            <v-card>
+              <v-toolbar
+                color="success"
+                class="text-h5 font-weight-bold"
+                dark
+                dense
+                ><v-spacer />발생원인 및 개선대책 현황 작성<v-spacer /><v-btn
+                  icon
+                  dark
+                  @click="openReason = false"
+                >
+                  <v-icon>fa-times-circle</v-icon>
+                </v-btn></v-toolbar
+              >
+              <v-card-text class="mt-5">
+                <h3><v-icon small class="mr-1">fa-wrench</v-icon>조치사항</h3>
+                <v-textarea solo label="조치사항을 작성해 주세요"></v-textarea>
+                <h3>
+                  <v-icon small class="mr-1">fa-question-circle</v-icon>발생원인
+                </h3>
+                <v-textarea solo label="발생원인을 작성해 주세요"></v-textarea>
+                <h3>
+                  <v-icon small class="mr-1">fa-tasks</v-icon>재발방지대책
+                </h3>
+                <v-textarea
+                  solo
+                  label="재발방지대책을 작성해 주세요"
+                ></v-textarea>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="success"
+                  dark
+                  width="100%"
+                  class="font-weight-bold"
+                  @click="openReason = false"
+                >
+                  등록
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <!-- 발생원인 및 개선대책 현황 작성 종료 -->
         </v-col>
         <v-col>
           <!-- 수정기록 확인 시작 -->
-          <v-dialog v-model="open" width="600px">
+          <v-dialog v-model="openLog" width="600px">
             <template #activator="{ on, attrs }">
               <v-btn
                 depressed
@@ -103,9 +155,19 @@
               >
             </template>
             <v-card>
-              <v-card-title>
-                <span class="text-h5">수정기록 확인</span>
-              </v-card-title>
+              <v-toolbar
+                color="success"
+                class="text-h5 font-weight-bold"
+                dark
+                dense
+                ><v-spacer />수정기록 확인<v-spacer /><v-btn
+                  icon
+                  dark
+                  @click="openLog = false"
+                >
+                  <v-icon>fa-times-circle</v-icon>
+                </v-btn></v-toolbar
+              >
               <v-card-text>
                 <v-simple-table>
                   <template #default>
@@ -130,12 +192,6 @@
                   </template>
                 </v-simple-table>
               </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="green darken-1" dark @click="open = false">
-                  확인
-                </v-btn>
-              </v-card-actions>
             </v-card>
           </v-dialog>
           <!-- 수정기록 확인 종료 -->
@@ -182,7 +238,8 @@ export default {
   data() {
     return {
       snackbar: false,
-      open: false,
+      openLog: false,
+      openReason: false,
       imgs: ['/img/1.jpeg', '/img/2.jpeg', '/img/2.jpeg', '/img/2.jpeg'],
       editLog: [
         {
