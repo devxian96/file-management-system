@@ -100,6 +100,15 @@
       </v-row>
     </v-card-actions>
     <!-- 버튼 종료 -->
+
+    <v-card-text>
+      <h3><v-icon small class="mr-1">fa-wrench</v-icon>조치사항</h3>
+      <p>뭔가의 조치사항</p>
+      <h3><v-icon small class="mr-1">fa-question-circle</v-icon>발생원인</h3>
+      <p>뭔가의 발생원인</p>
+      <h3><v-icon small class="mr-1">fa-tasks</v-icon>재발방지대책</h3>
+      <p>뭔가의 재발방지 대책</p>
+    </v-card-text>
   </v-card>
 </template>
 
