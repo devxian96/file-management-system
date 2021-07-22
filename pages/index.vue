@@ -16,7 +16,6 @@
     </v-carousel>
     <!-- 슬라이드 쇼 종료 -->
 
-
     <v-divider class="mt-5 mb-5" />
 
     <v-row>

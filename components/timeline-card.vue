@@ -90,9 +90,53 @@
           >
         </v-col>
         <v-col>
-          <v-btn depressed color="transparent" width="100%"
-            >수정기록 확인</v-btn
-          >
+          <!-- 수정기록 확인 시작 -->
+          <v-dialog v-model="open" width="600px">
+            <template #activator="{ on, attrs }">
+              <v-btn
+                depressed
+                color="transparent"
+                width="100%"
+                v-bind="attrs"
+                v-on="on"
+                >수정기록 확인</v-btn
+              >
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="text-h5">수정기록 확인</span>
+              </v-card-title>
+              <v-card-text>
+                <v-simple-table>
+                  <template #default>
+                    <thead>
+                      <tr>
+                        <th class="text-left">이름(계정)</th>
+                        <th class="text-center">수정전</th>
+                        <th class="text-center">수정후</th>
+                        <th class="text-right">수정일</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="item in editLog" :key="item.name">
+                        <td>{{ item.name }}({{ item.id }})</td>
+                        <td>{{ item.before }}</td>
+                        <td>{{ item.after }}</td>
+                        <td>{{ item.updatedAt }}</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green darken-1" dark @click="open = false">
+                  확인
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+          <!-- 수정기록 확인 종료 -->
         </v-col>
         <v-col>
           <v-btn depressed color="transparent" width="100%">공유</v-btn>
@@ -118,7 +162,45 @@ export default {
   components: { facebookStyleImg },
   data() {
     return {
+      open: false,
       imgs: ['/img/1.jpeg', '/img/2.jpeg', '/img/2.jpeg', '/img/2.jpeg'],
+      editLog: [
+        {
+          name: '홍길동',
+          id: 'coolman555',
+          before: '안녕',
+          after: '안녕하세요',
+          updatedAt: new Date().toLocaleString(),
+        },
+        {
+          name: '홍길동',
+          id: 'coolman555',
+          before: '안녕',
+          after: '안녕하세요',
+          updatedAt: new Date().toLocaleString(),
+        },
+        {
+          name: '홍길동',
+          id: 'coolman555',
+          before: '안녕',
+          after: '안녕하세요',
+          updatedAt: new Date().toLocaleString(),
+        },
+        {
+          name: '홍길동',
+          id: 'coolman555',
+          before: '안녕',
+          after: '안녕하세요',
+          updatedAt: new Date().toLocaleString(),
+        },
+        {
+          name: '홍길동',
+          id: 'coolman555',
+          before: '안녕',
+          after: '안녕하세요',
+          updatedAt: new Date().toLocaleString(),
+        },
+      ],
     }
   },
 }
