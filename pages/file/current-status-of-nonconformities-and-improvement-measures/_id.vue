@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-subheader>부적합 발생 및 개선대책 현황 [{{ title }}]</v-subheader>
-
     <v-row dense>
       <v-col cols="8">
+        <v-subheader>부적합 발생 및 개선대책 현황 [{{ title }}]</v-subheader>
+
         <v-sheet class="mb-8 mt-3" elevation="2">
           <v-row>
             <!-- 글쓰기 버튼 -->

@@ -5,12 +5,11 @@
       :items-per-page.sync="itemsPerPage"
       :page.sync="page"
       :search="search"
-      :sort-by="sortBy.toLowerCase()"
       :sort-desc="sortDesc"
       hide-default-footer
     >
       <template #header>
-        <v-toolbar dark color="blue darken-3" class="mb-1">
+        <v-toolbar dark color="success" class="mb-1">
           <v-text-field
             v-model="search"
             clearable
@@ -18,28 +17,8 @@
             solo-inverted
             hide-details
             prepend-inner-icon="fa-search"
-            label="Search"
+            label="검색"
           ></v-text-field>
-          <template v-if="$vuetify.breakpoint.mdAndUp">
-            <v-spacer></v-spacer>
-            <v-select
-              v-model="sortBy"
-              flat
-              solo-inverted
-              hide-details
-              :items="keys"
-              label="Sort by"
-            ></v-select>
-            <v-spacer></v-spacer>
-            <v-btn-toggle v-model="sortDesc" mandatory>
-              <v-btn large depressed color="blue" :value="false">
-                <v-icon>fa-arrow-up</v-icon>
-              </v-btn>
-              <v-btn large depressed color="blue" :value="true">
-                <v-icon>fa-arrow-down</v-icon>
-              </v-btn>
-            </v-btn-toggle>
-          </template>
         </v-toolbar>
       </template>
 
@@ -55,15 +34,8 @@
 
               <v-list dense>
                 <v-list-item v-for="(key, index) in filteredKeys" :key="index">
-                  <v-list-item-content
-                    :class="{ 'blue--text': sortBy === key }"
-                  >
-                    {{ key }}:
-                  </v-list-item-content>
-                  <v-list-item-content
-                    class="align-end"
-                    :class="{ 'blue--text': sortBy === key }"
-                  >
+                  <v-list-item-content> {{ key }}: </v-list-item-content>
+                  <v-list-item-content class="align-end">
                     {{ item[key.toLowerCase()] }}
                   </v-list-item-content>
                 </v-list-item>
@@ -81,7 +53,7 @@
               <v-btn
                 dark
                 text
-                color="primary"
+                color="success"
                 class="ml-2"
                 v-bind="attrs"
                 v-on="on"
@@ -109,13 +81,21 @@
           <v-btn
             fab
             dark
-            color="blue darken-3"
+            color="success"
+            x-small
             class="mr-1"
             @click="formerPage"
           >
             <v-icon>fa-chevron-left</v-icon>
           </v-btn>
-          <v-btn fab dark color="blue darken-3" class="ml-1" @click="nextPage">
+          <v-btn
+            fab
+            dark
+            color="success"
+            x-small
+            class="ml-1"
+            @click="nextPage"
+          >
             <v-icon>fa-chevron-right</v-icon>
           </v-btn>
         </v-row>
