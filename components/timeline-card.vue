@@ -35,13 +35,13 @@
             </v-chip>
           </v-list-item-subtitle>
         </v-list-item>
-        <v-list-item color="accent">
+        <v-list-item>
           <v-list-item-title> 발생일자 </v-list-item-title>
           <v-list-item-subtitle>
             {{ new Date().toLocaleString() }}
           </v-list-item-subtitle>
         </v-list-item>
-        <v-list-item>
+        <v-list-item color="accent">
           <v-list-item-title> 고객사 </v-list-item-title>
           <v-list-item-subtitle> 유한정밀 </v-list-item-subtitle>
         </v-list-item>
@@ -51,6 +51,10 @@
         </v-list-item>
         <v-list-item color="accent">
           <v-list-item-title> 귀책부서 </v-list-item-title>
+          <v-list-item-subtitle> 무진 </v-list-item-subtitle>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-title> 귀책구분 </v-list-item-title>
           <v-list-item-subtitle> 무진 </v-list-item-subtitle>
         </v-list-item>
         <v-list-item color="accent">
@@ -88,12 +92,7 @@
           <!-- 발생원인 및 개선대책 현황 작성 시작 -->
           <v-dialog v-model="openReason" width="600px">
             <template #activator="{ on, attrs }">
-              <v-btn
-                depressed
-                color="transparent"
-                width="100%"
-                v-bind="attrs"
-                v-on="on"
+              <v-btn depressed text width="100%" v-bind="attrs" v-on="on"
                 >발생원인 및 개선대책 현황 작성</v-btn
               >
             </template>
@@ -145,12 +144,7 @@
           <!-- 수정기록 확인 시작 -->
           <v-dialog v-model="openLog" width="600px">
             <template #activator="{ on, attrs }">
-              <v-btn
-                depressed
-                color="transparent"
-                width="100%"
-                v-bind="attrs"
-                v-on="on"
+              <v-btn depressed text width="100%" v-bind="attrs" v-on="on"
                 >수정기록 확인</v-btn
               >
             </template>
@@ -198,11 +192,7 @@
         </v-col>
         <v-col>
           <!-- 공유 기능 시작 -->
-          <v-btn
-            depressed
-            color="transparent"
-            width="100%"
-            @click="copyClipBoard()"
+          <v-btn depressed text width="100%" @click="copyClipBoard()"
             >공유</v-btn
           >
           <v-snackbar v-model="snackbar" shaped>

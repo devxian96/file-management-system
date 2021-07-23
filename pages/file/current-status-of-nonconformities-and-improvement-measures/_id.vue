@@ -11,14 +11,101 @@
               <v-avatar size="32" color="success" class="mr-2 mt-2 float-left">
                 <v-icon>fa-user</v-icon>
               </v-avatar>
-              <v-text-field
-                label="새로운 이슈가 발생하셨나요?"
-                disabled
-                filled
-                rounded
-                dense
-                class="write-input"
-              ></v-text-field>
+
+              <!-- 게시글 입력 시작 -->
+              <v-dialog v-model="openWrite" width="600px">
+                <template #activator="{ on, attrs }">
+                  <v-btn
+                    depressed
+                    filled
+                    rounded
+                    dense
+                    class="write-input mt-2 mb-5"
+                    v-bind="attrs"
+                    width="95%"
+                    v-on="on"
+                    >새로운 이슈가 발생하셨나요?<v-spacer
+                  /></v-btn>
+                </template>
+                <v-card>
+                  <v-toolbar
+                    color="success"
+                    class="text-h5 font-weight-bold"
+                    dark
+                    dense
+                    ><v-spacer />이슈 만들기<v-spacer /><v-btn
+                      icon
+                      dark
+                      @click="openWrite = false"
+                    >
+                      <v-icon>fa-times-circle</v-icon>
+                    </v-btn></v-toolbar
+                  >
+                  <v-card-text class="mt-5">
+                    <v-overflow-btn
+                      class="my-2"
+                      :items="sort"
+                      label="불량현황"
+                      dense
+                      hide-details
+                    ></v-overflow-btn>
+
+                    <h3>발생일자</h3>
+                    <v-date-picker
+                      v-model="picker"
+                      landscape
+                      full-width
+                      header-color="success"
+                      locale="ko-kr"
+                    ></v-date-picker>
+
+                    <v-text-field label="고객사" filled class="mt-5" />
+
+                    <v-text-field label="관리번호" filled />
+
+                    <v-text-field label="귀책부서" filled />
+
+                    <v-text-field label="귀책구분" filled />
+
+                    <v-text-field label="작업자" filled />
+
+                    <v-overflow-btn
+                      class="mb-6 mt-0"
+                      :items="sort"
+                      label="불량종류"
+                      dense
+                      hide-details
+                    ></v-overflow-btn>
+
+                    <v-text-field label="불량상세" filled />
+
+                    <v-textarea filled label="불량요약" />
+
+                    <v-textarea filled label="비고" />
+
+                    <v-file-input
+                      chips
+                      counter
+                      multiple
+                      show-size
+                      truncate-length="15"
+                      label="이미지 파일 업로드"
+                    ></v-file-input>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn
+                      color="success"
+                      dark
+                      width="100%"
+                      class="font-weight-bold"
+                      @click="openWrite = false"
+                    >
+                      등록
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <!-- 게시글 입력 종료 -->
 
               <v-divider />
             </v-col>
@@ -65,6 +152,7 @@
         <timeline-card v-for="item in [1, 2]" :key="item" />
       </v-col>
       <v-col cols="4">
+        <!-- 페이지 통계 -->
         <timeline-calc />
       </v-col>
     </v-row>
@@ -84,6 +172,10 @@ export default {
   },
   data() {
     return {
+      openWrite: false,
+      picker: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
       title: '2021년 7월 1주차 2021년 7월 1주차',
       benched: 10,
       defectStatus: ['기본', '미결', '완료'],
