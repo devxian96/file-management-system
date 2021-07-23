@@ -31,7 +31,7 @@
           <v-list-item-subtitle>
             <v-chip class="ma-2" color="red" small label text-color="white">
               <v-icon left> fa-info </v-icon>
-              미결
+              미결 (치수불량)
             </v-chip>
           </v-list-item-subtitle>
         </v-list-item>
