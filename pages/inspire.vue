@@ -1,30 +1,35 @@
-<!-- -->
 <template>
   <div>
   <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-  <v-subheader>관리자 설정</v-subheader>
-  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-  <v-text-field
-  autofocus
-  dense
-  clearable
-  flat
-  messages="2,000 회원 검색됨"
-  outlined
-  placeholder="회원 아이디를 입력하십시오"
-  prepend-inner-icon="fa-search"
-  full-width
-/>
-  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-  <v-data-table
-    v-model="selected"
-    :headers="headers"
-    :items="desserts"
-    :single-select="singleSelect"
-    item-key="ID"
-    show-select
-    class="elevation-1"
+  <v-card>
+    <v-card-title>
+      관리자 설정
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      :search="search"
+
+      :single-select="singleSelect"
+      item-key="name"
+      show-select
+      class="elevation-1"
   >
+      <!-- https://vuetifyjs.com/en/components/data-tables/#crud-actions
+      이 사이트의 Row selection 의 코드를 <v-data-table> 태그 안에 넣었으며,
+      아래 세 줄의 코드를 제거하니 작동됨.
+      v-model="selected"
+      :headers="headers"
+      :items="desserts" 
+      -->
     <template v-slot:top>
       <v-switch
         v-model="singleSelect"
@@ -32,8 +37,8 @@
         class="pa-3"
       ></v-switch>
     </template>
-  </v-data-table>
-
+    ></v-data-table>
+  </v-card>
   <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
   </div>
 </template>
@@ -49,6 +54,7 @@
     data () {
       return {
         singleSelect: false,
+        search: '',
         selected: [],
         headers: [
           {
@@ -64,9 +70,10 @@
           { text: '부서', value: 'division' },
           { text: '권한', value: 'level' },
           { text: 'IP', value: 'ip' },
-          { text: '접속 기록', value: 'log' }
+          { text: '접속 기록', value: 'log' },
+          { text: '제어', value: 'contron' }
         ],
-        // 이름, 아이디, 비밀번호, 전화번호 / 직책, 부서, 권한 / IP, 접속 기록(리스트)
+        // 이름,아이디,비밀번호,전화번호/직책,부서,권한/IP,접속기록(리스트)
         desserts: [
           {
             ID: 'Frozen Yogurt',
