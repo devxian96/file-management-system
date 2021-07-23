@@ -14,22 +14,16 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table
-      :headers="headers"
-      :items="desserts"
-      :search="search"
-
-      :single-select="singleSelect"
-      item-key="name"
-      show-select
-      class="elevation-1"
+    v-model="selected"
+    :headers="headers"
+    :items="desserts"
+    :single-select="singleSelect"
+    item-key="ID"
+    show-select
+    class="elevation-1"
   >
       <!-- https://vuetifyjs.com/en/components/data-tables/#crud-actions
-      이 사이트의 Row selection 의 코드를 <v-data-table> 태그 안에 넣었으며,
-      아래 세 줄의 코드를 제거하니 작동됨.
-      v-model="selected"
-      :headers="headers"
-      :items="desserts" 
-      -->
+      이 사이트의 Row selection 의 코드를 <v-data-table> 태그 안에 넣음  -->
     <template v-slot:top>
       <v-switch
         v-model="singleSelect"
