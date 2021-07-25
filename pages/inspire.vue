@@ -18,9 +18,12 @@
     <v-simple-table>
       <template #default>
         <thead>
+          <!-- 상단 가로열 추가 시작 -->
+          <!-- 기존에 ID를 name 태그로 정했기에
+          실제 ID목록을 name태그로, 실명 목록을 realname태그로 지정 -->
           <tr>
-            <th class="text-id">ID</th>
-            <th class="text-name">이름</th>
+            <th class="text-name">ID</th>
+            <th class="text-realName">이름</th>
             <th class="text-passWord">비밀번호</th>
             <th class="text-phoneNumber">전화번호</th>
             <th class="text-position">직책</th>        
@@ -28,8 +31,10 @@
             <th class="text-level">권한</th>        
             <th class="text-protocol">IP</th>        
             <th class="text-log">접속기록</th>
+            <th class="text-log">접속기록</th>
             <th class="text-admin">관리</th>
           </tr>
+          <!-- 상단 가로열 추가 종료-->
         </thead>
         <tbody>
           <tr
@@ -41,7 +46,14 @@
               )
             "
           >
-            <td>{{ item.name }}</td>
+            <td class="text-name">{{ item.name }}</td>
+            <td class="text-realName">홍길동</td>
+            <td class="text-passWord">1234</td>
+            <td class="text-PhoneNumber">010-0000-0000</td>
+            <td class="text-position">사원</td>
+            <td class="text-division">영업부</td>
+            <td class="text-level">admin</td>
+            <td class="text-protocol">localhost: 3000</td>
             <td class="text-right">{{ item.date }}</td>
             <td class="text-right">{{ item.date }}</td>
           </tr>
