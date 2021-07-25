@@ -86,12 +86,6 @@
             </td>
             <!-- 표 데이터 추가 종료-->
           </tr>
-          <tr
-            v-for="item in desserts"
-            :key="item.passWord"
-          >
-          <td class="text-passWord">{{ item.passWord }}</td>
-          </tr>
         </tbody>
       </template>
     </v-simple-table>
@@ -121,7 +115,7 @@ export default {
         {
           name: 'Frozen Yogurt',
           date: new Date().toLocaleString(),
-          passWord: 1111,
+          passWord: '1111',
           realName: '김씨',
           phoneNumber:'010-0000-0000',
           division: '영업부',
@@ -143,6 +137,7 @@ export default {
         {
           name: 'Cupcake',
           date: new Date().toLocaleString(),
+          position: '사장'
         },
         {
           name: 'Gingerbread',
