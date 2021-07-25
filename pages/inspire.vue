@@ -22,12 +22,13 @@
           <!-- 기존에 ID를 name 태그로 정했기에
           실제 ID목록을 name태그로, 실명 목록을 realname태그로 지정 -->
           <tr>
+            <!-- 체크박스 임시 제거
             <th>
               <v-checkbox
                 v-model="checkbox"
                 :label="`Checkbox 1: ${checkbox.toString()}`"
               ></v-checkbox>
-            </th>
+            </th> -->
             <th class="text-name">ID</th>
             <th class="text-passWord">비밀번호</th>
             <th class="text-realName">이름</th>
@@ -37,8 +38,8 @@
             <th class="text-level">권한</th>        
             <th class="text-protocol">IP</th>        
             <th class="text-log">접속기록</th>
-            <th class="text-log">접속기록</th>
-            <th class="text-admin">관리</th>
+            <th class="text-modify">수정</th>
+            <th class="text-delete">삭제</th>
           </tr>
           <!-- 테이블 헤더 추가 종료-->
         </thead>
@@ -47,7 +48,7 @@
             v-for="item in desserts"
             :key="item.name"
           >
-            <!-- 위 tr태그 안에서 끌어내려 주석 처리
+            <!-- 링크 연결 걸리적거려서 위 tr태그 안에서 끌어내려 주석 처리
               @click="
               $router.push(
                 '/file/current-status-of-nonconformities-and-improvement-measures/1'
@@ -55,28 +56,39 @@
             " -->
           <!-- 표 데이터 추가 시작 -->
           <!-- 데이터 안의 스트링은 변수 지정 작업 필요 -->
-            <td>
+
+            <!-- <td>
               <v-checkbox
                 v-model="checkbox"
                 :label="`Checkbox 1: ${checkbox.toString()}`"
               ></v-checkbox>
-            </td>
+            </td> -->
             <td class="text-name">{{ item.name }}</td>
             <td class="text-passWord">{{ item.passWord }}</td>
-            <td class="text-realName">홍길동</td>
-            <td class="text-PhoneNumber">010-0000-0000</td>
-            <td class="text-division">영업부</td>
-            <td class="text-position">사원</td>
-            <td class="text-level">admin</td>
-            <td class="text-protocol">localhost: 3000</td>
-            
+            <td class="text-realName">{{ item.realName }}</td>
+            <td class="text-phoneNumber">{{ item.phoneNumber }}</td>
+            <td class="text-division">{{ item.division }}</td>
+            <td class="text-position">{{ item.position }}</td>
+            <td class="text-level">{{ item.level }}</td>
+            <td class="text-protocol">{{ item.protocol }}</td>
             <td class="text-right">{{ item.date }}</td>
-            <td class="text-right">{{ item.date }}</td>
+            <td class="text-modify">
+              <v-btn
+                elevation="2"
+              >
+              </v-btn>
+            </td>
+            <td class="text-delete">
+              <v-btn
+                elevation="2"
+              >
+              </v-btn>
+            </td>
             <!-- 표 데이터 추가 종료-->
           </tr>
           <tr
             v-for="item in desserts"
-            :key="item.name"
+            :key="item.passWord"
           >
           <td class="text-passWord">{{ item.passWord }}</td>
           </tr>
@@ -110,18 +122,18 @@ export default {
           name: 'Frozen Yogurt',
           date: new Date().toLocaleString(),
           passWord: 1111,
-  
-          // text-realName">홍길동`
-          // text-PhoneNumber">010-0000-0000`
-          // text-division">영업부`
-          // text-position">사원`
-          // text-level">admin`
-          // text-protocol">localhost: 3000`
-            
+          realName: '김씨',
+          phoneNumber:'010-0000-0000',
+          division: '영업부',
+          position: '사원',
+          level: 'admin',
+          protocol: 'localhost: 3000',    
         },
         {
           name: 'Ice cream sandwich',
           date: new Date().toLocaleString(),
+
+          realName: '장씨',
         },
         {
           name: 'Eclair',
