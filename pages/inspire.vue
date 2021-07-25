@@ -39,7 +39,7 @@
             <th class="text-protocol">IP</th>        
             <th class="text-log">접속기록</th>
             <th class="text-modify">수정</th>
-            <th class="text-delete">삭제</th>
+            <!-- <th class="text-delete">삭제</th> -->
           </tr>
           <!-- 테이블 헤더 추가 종료-->
         </thead>
@@ -55,8 +55,6 @@
               )
             " -->
           <!-- 표 데이터 추가 시작 -->
-          <!-- 데이터 안의 스트링은 변수 지정 작업 필요 -->
-
             <!-- <td>
               <v-checkbox
                 v-model="checkbox"
@@ -74,14 +72,16 @@
             <td class="text-right">{{ item.date }}</td>
             <td class="text-modify">
               <v-btn
-                elevation="2"
+                color="primary"
               >
+                수정
               </v-btn>
-            </td>
-            <td class="text-delete">
+            <!-- </td> -->
+            <!-- <td class="text-delete"> -->
               <v-btn
-                elevation="2"
+                color="error"
               >
+                제거
               </v-btn>
             </td>
             <!-- 표 데이터 추가 종료-->
@@ -97,21 +97,168 @@
     </div>
     <!-- 페이지 네이션 종료 -->
 
-    <!-- 회원 추가 시작 -->
-    <v-row dense>
+    <!-- 회원 추가 시작 삭제?-->
+    <!-- <v-row dense>
       <v-btn absolute right color="success">회원 추가</v-btn>
-    </v-row>
+    </v-row> -->
+  <v-row justify="center">
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="600px"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          회원 추가
+        </v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">회원 정보</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  label="Email*"
+                  hint="추가 설명 필요시 작성"
+                  persistent-hint
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  label="Password*"
+                  type="password"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+              >
+                <v-text-field
+                  label="이름"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+              >
+                <v-text-field
+                  label="전화번호"
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+              >
+                <v-text-field
+                  label="IP"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-select
+                  :items="['사원', '대리', '과장', '사장']"
+                  label="직책"
+                  required
+                ></v-select>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-select
+                  :items="['기획부', '제작부', '개발부', '관리부']"
+                  label="부서"
+                  required
+                ></v-select>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-select
+                  :items="['1', '2', '3', '4']"
+                  label="권한"
+                  required
+                ></v-select>
+              </v-col>
+              
+            </v-row>
+          </v-container>
+        <small>추가 설명 필요시 작성</small>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialog = false"
+          >
+            Close
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialog = false"
+          >
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-row>
     <!-- 회원 추가 종료 -->
   </div>
 </template>
+
+
+
+
+
+
+
+
 
 <script>
 export default {
   data() {
     return {
+      // 추가한 스크립트
       checkbox: true,
+      dialog: false,
+      // 검색창 왼쪽 삭제?
+      items: ['Arial', 'Calibri', 'Courier', 'Verdana'],
+      // 추가한 스크립트
       page: 1,
       desserts: [
+        //   작성양식
+        //   {
+        //   name: ,
+        //   date: new Date().toLocaleString(),
+        //   passWord: ,
+        //   realName: ,
+        //   phoneNumber: ,
+        //   division: ,
+        //   position: ,
+        //   level: ,
+        //   protocol: ,    
+        // },
         {
           name: 'Frozen Yogurt',
           date: new Date().toLocaleString(),
@@ -126,7 +273,7 @@ export default {
         {
           name: 'Ice cream sandwich',
           date: new Date().toLocaleString(),
-
+          passWord: '0000',
           realName: '장씨',
         },
         {
