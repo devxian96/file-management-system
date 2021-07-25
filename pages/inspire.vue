@@ -109,7 +109,7 @@ export default {
         {
           name: 'Frozen Yogurt',
           date: new Date().toLocaleString(),
-          passWord: 1111
+          passWord: 1111,
   
           // text-realName">홍길동`
           // text-PhoneNumber">010-0000-0000`
