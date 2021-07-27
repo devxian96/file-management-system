@@ -30,9 +30,7 @@
               ></v-checkbox>
             </th> -->
             <th class="text-name">ID</th>
-            <th class="text-passWord">비밀번호</th>
             <th class="text-realName">이름</th>
-            <th class="text-phoneNumber">전화번호</th>
             <th class="text-division">부서</th>
             <th class="text-position">직책</th>
             <th class="text-level">권한</th>
@@ -59,9 +57,7 @@
               ></v-checkbox>
             </td> -->
             <td class="text-name">{{ item.name }}</td>
-            <td class="text-passWord">{{ item.passWord }}</td>
             <td class="text-realName">{{ item.realName }}</td>
-            <td class="text-phoneNumber">{{ item.phoneNumber }}</td>
             <td class="text-division">{{ item.division }}</td>
             <td class="text-position">{{ item.position }}</td>
             <td class="text-level">{{ item.level }}</td>
@@ -86,99 +82,14 @@
     </div>
     <!-- 페이지 네이션 종료 -->
 
-    <!-- 회원 추가 dialog 시작 삭제?-->
-    <!-- <v-row dense>
-      <v-btn absolute right color="success">회원 추가</v-btn>
-    </v-row> -->
-    <v-row justify="center">
-      <v-dialog v-model="dialog" persistent max-width="600px">
-        <template #activator="{ on, attrs }">
-          <v-btn color="primary" dark v-bind="attrs" v-on="on">
-            회원 추가
-          </v-btn>
-        </template>
-        <v-card>
-          <v-card-title>
-            <span class="text-h5">회원 정보</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field
-                    label="Email*"
-                    hint="추가 설명 필요시 작성"
-                    persistent-hint
-                    required
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field
-                    label="Password*"
-                    type="password"
-                    required
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="이름" required></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="전화번호"></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="IP" required></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-select
-                    :items="['사원', '대리', '과장', '사장']"
-                    label="직책"
-                    required
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-select
-                    :items="['기획부', '제작부', '개발부', '관리부']"
-                    label="부서"
-                    required
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-select
-                    :items="['1', '2', '3', '4']"
-                    label="권한"
-                    required
-                  ></v-select>
-                </v-col>
-              </v-row>
-            </v-container>
-            <small>추가 설명 필요시 작성</small>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Close
-            </v-btn>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Save
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-row>
-      <!-- 회원 추가 dialog 종료 -->
-
     <!-- 게시글 입력 시작 -->
     <v-dialog v-model="openWrite" width="600px">
       <template #activator="{ on, attrs }">
-        <!-- <v-btn color="primary" dark v-bind="attrs" v-on="on"> -->
         <v-btn
-          depressed
-          filled
-          rounded
+          absolute right color="success"
           dense
-          class="write-input mt-2 mb-5"
+          filled
           v-bind="attrs"
-          width="95%"
           v-on="on"
           >회원 추가<v-spacer
         /></v-btn>
@@ -198,22 +109,23 @@
           </v-btn></v-toolbar
         >
         <v-card-text class="mt-5">
-
           <v-text-field label="ID" filled class="mt-5" />
 
-          <v-text-field label="비밀번호" type="password" filled />
+          <v-text-field label="비밀번호(블라인드 기능on)" type="password" filled />
+
+          <v-text-field label="이름" filled />
 
           <v-text-field label="전화번호" filled />
 
           <v-text-field label="부서" filled />
-
+                
           <v-text-field label="직책" filled />
-          
+
           <v-text-field label="IP" filled />
 
           <v-overflow-btn
             class="mb-6 mt-0"
-            :items="level"
+            :items="['1', '2', '3', '4']"
             label="권한"
             dense
           ></v-overflow-btn>
@@ -241,17 +153,14 @@ export default {
     return {
       // 추가한 스크립트
       checkbox: true,
-      dialog: false,
-      openWrite: false,
-      level: [1, 2, 3, 4],
       // 추가한 스크립트
+      openWrite: false,
       page: 1,
       desserts: [
         //   작성양식
         //   {
         //   name: ,
         //   date: new Date().toLocaleString(),
-        //   passWord: ,
         //   realName: ,
         //   phoneNumber: ,
         //   division: ,
@@ -262,24 +171,25 @@ export default {
         {
           name: 'Frozen Yogurt',
           date: new Date().toLocaleString(),
-          passWord: '1111',
           realName: '김씨',
-          phoneNumber: '010-0000-0000',
-          division: '영업부',
-          position: '사원',
+          division: '기획부',
+          position: '부장',
           level: 'admin',
           protocol: 'localhost: 3000',
         },
         {
           name: 'Ice cream sandwich',
           date: new Date().toLocaleString(),
-          passWord: '0000',
           realName: '장씨',
+          division: '개발부',
+          position: '사원',
+          level: 'user',
+          protocol: 'localhost: 8000',
+
         },
         {
           name: 'Eclair',
-          date: new Date().toLocaleString(),
-          passWord: 9999,
+          date: new Date().toLocaleString(),          
         },
         {
           name: 'Cupcake',
