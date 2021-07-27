@@ -86,7 +86,7 @@
     </div>
     <!-- 페이지 네이션 종료 -->
 
-    <!-- 회원 추가 시작 삭제?-->
+    <!-- 회원 추가 dialog 시작 삭제?-->
     <!-- <v-row dense>
       <v-btn absolute right color="success">회원 추가</v-btn>
     </v-row> -->
@@ -165,7 +165,73 @@
         </v-card>
       </v-dialog>
     </v-row>
-    <!-- 회원 추가 종료 -->
+      <!-- 회원 추가 dialog 종료 -->
+
+    <!-- 게시글 입력 시작 -->
+    <v-dialog v-model="openWrite" width="600px">
+      <template #activator="{ on, attrs }">
+        <!-- <v-btn color="primary" dark v-bind="attrs" v-on="on"> -->
+        <v-btn
+          depressed
+          filled
+          rounded
+          dense
+          class="write-input mt-2 mb-5"
+          v-bind="attrs"
+          width="95%"
+          v-on="on"
+          >회원 추가<v-spacer
+        /></v-btn>
+      </template>
+      <v-card>
+        <v-toolbar
+          color="success"
+          class="text-h5 font-weight-bold"
+          dark
+          dense
+          ><v-spacer />회원 상세 정보<v-spacer /><v-btn
+            icon
+            dark
+            @click="openWrite = false"
+          >
+            <v-icon>fa-times-circle</v-icon>
+          </v-btn></v-toolbar
+        >
+        <v-card-text class="mt-5">
+
+          <v-text-field label="ID" filled class="mt-5" />
+
+          <v-text-field label="비밀번호" type="password" filled />
+
+          <v-text-field label="전화번호" filled />
+
+          <v-text-field label="부서" filled />
+
+          <v-text-field label="직책" filled />
+          
+          <v-text-field label="IP" filled />
+
+          <v-overflow-btn
+            class="mb-6 mt-0"
+            :items="level"
+            label="권한"
+            dense
+          ></v-overflow-btn>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            color="success"
+            dark
+            width="100%"
+            class="font-weight-bold"
+            @click="openWrite = false"
+          >
+            등록
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- 게시글 입력 종료 -->
   </div>
 </template>
 
@@ -176,8 +242,8 @@ export default {
       // 추가한 스크립트
       checkbox: true,
       dialog: false,
-      // 검색창 왼쪽 삭제?
-      items: ['Arial', 'Calibri', 'Courier', 'Verdana'],
+      openWrite: false,
+      level: [1, 2, 3, 4],
       // 추가한 스크립트
       page: 1,
       desserts: [
