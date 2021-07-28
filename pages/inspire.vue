@@ -43,12 +43,7 @@
         </thead>
         <tbody>
           <tr v-for="item in desserts" :key="item.name">
-            <!-- 링크 연결 걸리적거려서 위 tr태그 안에서 끌어내려 주석 처리
-              @click="
-              $router.push(
-                '/file/current-status-of-nonconformities-and-improvement-measures/1'
-              )
-            " -->
+
             <!-- 표 데이터 추가 시작 -->
             <!-- <td>
               <v-checkbox
@@ -64,7 +59,16 @@
             <td class="text-protocol">{{ item.protocol }}</td>
             <td class="text-right">{{ item.date }}</td>
             <td class="text-modify">
-              <v-btn color="primary"> 수정 </v-btn>
+              <v-btn 
+                color="primary"
+                @click="
+                  $router.push(
+                    'inspire-info'
+                  )
+                "
+              >
+              수정
+              </v-btn>
               <!-- </td> -->
               <!-- <td class="text-delete"> -->
               <v-btn color="error"> 제거 </v-btn>
@@ -82,7 +86,7 @@
     </div>
     <!-- 페이지 네이션 종료 -->
 
-    <!-- 게시글 입력 시작 -->
+    <!-- 회원 추가 시작 -->
     <v-dialog v-model="openWrite" width="600px">
       <template #activator="{ on, attrs }">
         <v-btn
@@ -109,26 +113,48 @@
           </v-btn></v-toolbar
         >
         <v-card-text class="mt-5">
-          <v-text-field label="ID" filled class="mt-5" />
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-text-field label="ID" filled class="mt-5" />
+          </v-col>
 
-          <v-text-field label="비밀번호(블라인드 기능on)" type="password" filled />
+          <v-col cols="12" sm="6">
+            <v-text-field label="비밀번호" filled />
+          </v-col>
 
-          <v-text-field label="이름" filled />
+          <v-col cols="12" sm="6">
+            <v-text-field label="이름" filled />
+          </v-col>
 
-          <v-text-field label="전화번호" filled />
+          <v-col cols="12" sm="6">
+            <v-text-field label="전화번호" filled />
+          </v-col>
 
-          <v-text-field label="부서" filled />
-                
-          <v-text-field label="직책" filled />
+          <v-col cols="12" sm="6">
+            <v-text-field label="부서" filled />
+          </v-col>
 
-          <v-text-field label="IP" filled />
+          <v-col cols="12" sm="6">  
+            <v-text-field label="직책" filled />
+          </v-col>
+          
+          <v-col cols="12" sm="6">
+            <v-text-field label="IP" filled />
+          </v-col>
 
-          <v-overflow-btn
-            class="mb-6 mt-0"
-            :items="['1', '2', '3', '4']"
-            label="권한"
-            dense
-          ></v-overflow-btn>
+          <v-col cols="12" sm="6">
+            <v-overflow-btn
+              class="mb-6 mt-0"
+              :items="['1', '2', '3', '4']"
+              label="권한"
+              filled
+            ></v-overflow-btn>
+          </v-col>
+          
+          <v-col cols="8" sm="12">
+            <v-text-field label="설명" filled />
+          </v-col>
+        </v-row>
         </v-card-text>
         <v-card-actions>
           <v-btn
@@ -143,7 +169,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!-- 게시글 입력 종료 -->
+    <!-- 회원 추가 종료 -->
   </div>
 </template>
 
