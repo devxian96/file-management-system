@@ -31,34 +31,53 @@
         </v-btn>
       </v-toolbar>
       <v-card-text>
-        <v-text-field
-          :disabled="!isEditing"
-          color="white"
-          label="ID"
-        ></v-text-field>
+      <v-row>
+        <v-col cols="12" sm="6">
+          <v-text-field
+            :disabled="!isEditing"
+            color="white"
+            label="ID"
+          ></v-text-field>
+          </v-col>
+        <v-col cols="12" sm="6">
+          <v-text-field label="비밀번호" filled />
+        </v-col>
 
-        <v-text-field label="비밀번호" filled />
+        <v-col cols="12" sm="6">
+          <v-text-field label="이름" filled />
+        </v-col>
 
-        <v-text-field label="이름" filled />
+        <v-col cols="12" sm="6">
+          <v-text-field label="전화번호" filled />
+        </v-col>
 
-        <v-text-field label="전화번호" filled />
+        <v-col cols="12" sm="6">
+          <v-text-field label="부서" filled />
+        </v-col>
 
-        <v-text-field label="부서" filled />
-              
-        <v-text-field label="직책" filled />
+        <v-col cols="12" sm="6">
+          <v-text-field label="직책" filled />
+        </v-col>
 
-        <v-text-field label="IP" filled />
+        <v-col cols="12" sm="6">
+          <v-text-field label="IP" filled />
+        </v-col>
 
+        <v-col cols="12" sm="6">
+          <v-autocomplete
+            :disabled="!isEditing"
+            :items="states"
+            :filter="customFilter"
+            color="white"
+            item-text="name"
+            label="권한"
+          ></v-autocomplete>
+          </v-col>
 
-        
-        <v-autocomplete
-          :disabled="!isEditing"
-          :items="states"
-          :filter="customFilter"
-          color="white"
-          item-text="name"
-          label="State"
-        ></v-autocomplete>
+        <v-col>
+          <v-text-field label="설명" filled />
+        </v-col>
+        </v-row>
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
@@ -189,12 +208,9 @@
         name: '관리자',
         headers: [
           {
-            text: '접속 기록',
             align: 'start',
             sortable: false,
-            value: 'name',
           },
-          
           { text: '접속 기록', value: 'time' },
           { text: 'IP', value: 'protocol' },
           { text: 'undefined', value: 'from' },
@@ -207,9 +223,8 @@
         ],
         messages: [
           {
-          name: 'Frozen Yogurt',
           from: '로그인',
-          date: new Date().toLocaleString(),
+          time: new Date().toLocaleString(),
           protocol: 'localhost:3000',
           result: '로그인 성공',
           referrer: 'https://www.youtube.com/',
