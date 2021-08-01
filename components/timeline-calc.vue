@@ -47,7 +47,7 @@
 
       <template #footer>
         <v-row class="mt-2" align="center" justify="center">
-          <span class="grey--text">Items per page</span>
+          <span class="grey--text">페이지 표시 갯수</span>
           <v-menu offset-y>
             <template #activator="{ on, attrs }">
               <v-btn
@@ -76,7 +76,7 @@
           <v-spacer></v-spacer>
 
           <span class="mr-4 grey--text">
-            Page {{ page }} of {{ numberOfPages }}
+            {{ page }}/{{ numberOfPages }} 페이지
           </span>
           <v-btn
             fab
