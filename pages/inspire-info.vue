@@ -1,8 +1,20 @@
 <template>
   <div>
     <v-row>
+      <v-icon
+        size="32"
+        color="primary"
+        @click="
+          $router.push(
+            'inspire'
+          )
+        ">
+        fas fa-arrow-left
+      </v-icon>
+      <v-subheader>회원 정보 및 접속 기록</v-subheader>
+    </v-row>
+    <v-row>
       <!-- 회원 정보 수정 시작 -->
-      <!-- 오른쪽 위 동그란 버튼 눌러야 수정 후 저장 가능 -->
       <v-col>
         <v-card class="overflow-hidden">
           <v-toolbar 
@@ -10,41 +22,47 @@
           color="success"
           dark
           >
-            <v-icon>mdi-account</v-icon>
             <v-toolbar-title class="font-weight-medium">
-              User Profile
+              회원 정보
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn
-              color="light-green darken-4"
-              fab
-              small
-              @click="isEditing = !isEditing"
-            >
-              <v-icon v-if="isEditing">
-                mdi-close
-              </v-icon>
-              <v-icon v-else>
-                mdi-pencil
-              </v-icon>
-            </v-btn>
+              <v-btn v-if="isEditing" @click="isEditing = !isEditing" color="light-green darken-4">
+                취소
+              </v-btn>
+              <v-btn  v-else @click="isEditing = !isEditing" color="light-green darken-4">
+                수정
+              </v-btn>
           </v-toolbar>
           <v-card-text>
             <v-row>
-              <v-col cols="12" sm="6">
-                <v-text-field :disabled="!isEditing" label="ID" filled dense/>
+              <v-col cols="12" sm="1">
+                <v-subheader>ID</v-subheader>
+              </v-col>
+              <v-col cols="12" sm="11">
+                <v-subheader>[ This is user id ]</v-subheader>
               </v-col>
 
               <v-col cols="12" sm="6">
-                <v-text-field :disabled="!isEditing" label="비밀번호" filled dense/>
+                <v-text-field
+                v-model="match"
+                :disabled="!isEditing"
+                label="비밀번호"
+                filled
+                dense/>
+              </v-col>
+              <!-- 비밀번호 일치 유효성 검사 적용 -->
+              <v-col cols="12" sm="6">
+                <v-text-field
+                v-model="match2"
+                :rules="rules"
+                :disabled="!isEditing"
+                label="비밀번호 확인"
+                filled
+                dense/>
               </v-col>
 
               <v-col cols="12" sm="6">
                 <v-text-field :disabled="!isEditing" label="이름" filled dense/>
-              </v-col>
-
-              <v-col cols="12" sm="6">
-                <v-text-field :disabled="!isEditing" label="전화번호" filled dense/>
               </v-col>
 
               <v-col cols="12" sm="6">
@@ -56,15 +74,11 @@
               </v-col>
 
               <v-col cols="12" sm="6">
-                <v-text-field :disabled="!isEditing" label="IP" filled dense/>
-              </v-col>
-
-              <v-col cols="12" sm="6">
                 <v-autocomplete
-                  :disabled="!isEditing" 
                   :items="states"
                   :filter="customFilter"
                   item-text="name"
+                  :disabled="!isEditing" 
                   label="권한"
                   filled
                   dense
@@ -83,7 +97,7 @@
               color="success"
               @click="save"
             >
-              Save
+              저장
             </v-btn>
           </v-card-actions>
           <v-snackbar
@@ -135,10 +149,10 @@
     </v-row>
     <!-- 회원 정보 수정 종료 -->
 
-    <!-- 접속 기록 시작 -->
+    <!-- 활동 로그 시작 -->
     <v-card class="log">
       <v-card-title>
-        접속 기록
+        활동 로그
       </v-card-title>
       <v-data-table
         dense
@@ -148,7 +162,7 @@
         class="elevation-1"
       ></v-data-table>
     </v-card>
-    <!-- 접속 기록 종료 -->
+    <!-- 활동 로그 종료 -->
 </div>
 </template>
 
@@ -156,6 +170,10 @@
   export default {
     data () {
       return {
+        // 비밀번호 일치 유효성 시작
+        match: '',
+        match2: '',
+        // 비밀번호 일치 유효성 종료
         hasSaved: false,
         isEditing: false,
         model: null,
@@ -170,58 +188,86 @@
             align: 'start',
             sortable: false,
           },
-          { text: '접속 기록', value: 'time' },
+          { text: '로그 생성일', value: 'time' },
           { text: 'IP', value: 'protocol' },
-          { text: 'undefined', value: 'from' },
+          { text: '활동', value: 'from' },
           { text: '결과', value: 'result' },
+          { text: '접근 경로', value: 'referrer' },
           { text: '수정한 문서', value: 'revise' },
-          { text: '접속 경로', value: 'referrer' },
-          { text: '브라우저', value: 'browser' },
-          { text: '운영체제', value: 'os' },
           { text: '접속기기', value: 'device' },  
+          { text: '계정 생성일', value: 'accountCreation' },  
+          { text: '계정 수정일', value: 'accountRevision' },  
         ],
         messages: [
+          // 작성 양식
+          // {
+          // time: new Date().toLocaleString(),
+          // from: '',
+          // protocol: '',
+          // result: '',
+          // referrer: '',
+          // device: '',  
+          // accountCreation: '',
+          // accountRevision: '',
+          // },
           {
-          from: '로그인',
           time: new Date().toLocaleString(),
+          from: '로그인',
           protocol: 'localhost:3000',
           result: '로그인 성공',
           referrer: 'https://www.youtube.com/',
-          browser: 'Chrome',
-          os: 'windows',
           device: 'mobile',
+          accountCreation: '2021. 7. 31',
+          accountRevision: '2021. 8. 1',
           },
           {
+            time: new Date().toLocaleString(),
             protocol: 'localhost:3000',
             from: '로그인',
-            time: new Date().toLocaleString(),
             result: '로그인 성공',
-            revise: 'document/file',
             referrer: 'google.com',
+            revise: 'document/file',
           },
           {
-            from: '로그인',
             time: new Date().toLocaleString(),
+            from: '로그인',
             result: '로그인 성공',
           },
           {
-            from: '로그인',
             time: new Date().toLocaleString(),
+            from: '로그인',
             result: '로그인 성공',
           },
           {
-            from: '로그인',
             time: new Date().toLocaleString(),
+            from: '로그인',
             result: '로그인 성공',
           },
           {
-            from: '로그인',
             time: new Date().toLocaleString(),
+            from: '로그인',
             result: '로그인 실패 (192.168.0.1)',
           },
         ],
       }
     },
+    // 비밀번호 일치 유효성 시작
+    computed: {
+      rules () {
+        const rules = []
+
+        if (this.match) {
+          const rule =
+            v => (!!v && v) === this.match ||
+              '비밀번호가 일치하지 않습니다'
+
+          rules.push(rule)
+        }
+
+        return rules
+      },
+    },
+    // 비밀번호 일치 유효성 종료
 
     methods: {
       customFilter (item, queryText, itemText) {
