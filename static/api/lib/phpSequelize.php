@@ -6,10 +6,10 @@
  */
 class phpSequelize
 {
-    public function __construct($sqla)
+    public function __construct($host, $user, $pass, $dbname)
     {
         //SQL Connection
-        $this->sqla = $sqla;
+        $this->sqla = sql_connect($host, $user, $pass, $dbname);
     }
 
     public static function options($options, $noCount = true)
