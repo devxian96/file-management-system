@@ -25,7 +25,7 @@ $app->post('/login', static function ($req, $res) {
 
 $app->post('/register', static function ($req, $res) {
     try {
-        $res->status()->send('hi');
+        $res->status(400)->send('hi');
     } catch (Exception $e) {
         http_response_code(500);
         $res->send($e);

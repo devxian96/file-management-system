@@ -4,6 +4,11 @@
  * Copyright 2021 DevXian
  * Licensed under MIT (https://github.com/devxian96/phpExpress/blob/main/LICENSE)
  */
+
+if(!define("_ERP_")) {
+    exit;
+}
+
 class phpSequelize
 {
     public function __construct($host, $user, $pass, $dbname)
