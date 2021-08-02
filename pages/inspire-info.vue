@@ -83,10 +83,20 @@
                   filled
                   dense
                 ></v-autocomplete>
-                </v-col>
+              </v-col>
 
-              <v-col>
-                <v-text-field :disabled="!isEditing" label="설명" filled dense/>
+              <v-col cols="12" sm="3">
+                <v-subheader>계정 생성일</v-subheader>
+              </v-col>
+              <v-col cols="12" sm="3">
+                <v-subheader>xxxx. x. x</v-subheader>
+              </v-col>
+
+              <v-col cols="12" sm="3">
+                <v-subheader>계정 수정일</v-subheader>
+              </v-col>
+              <v-col cols="12" sm="3">
+                <v-subheader>xxxx. x. x</v-subheader>
               </v-col>
             </v-row>
           </v-card-text>
@@ -102,12 +112,12 @@
           </v-card-actions>
           <v-snackbar
             v-model="hasSaved"
-            :timeout="2000"
+            :timeout="3000"
             absolute
             bottom
             left
           >
-            Your profile has been updated
+            수정 사항이 저장되었습니다
           </v-snackbar>
         </v-card>
       </v-col>
@@ -158,9 +168,20 @@
         dense
         :headers="headers"
         :items="messages"
+              :page.sync="page"
+
         item-key="from"
-        class="elevation-1"
+      :items-per-page="itemsPerPage"
+      hide-default-footer
+      class="elevation-1"
+      @page-count="pageCount = $event"
       ></v-data-table>
+      <div class="text-center pt-2">
+      <v-pagination
+        v-model="page"
+        :length="pageCount"
+      ></v-pagination>
+    </div>
     </v-card>
     <!-- 활동 로그 종료 -->
 </div>
@@ -170,6 +191,10 @@
   export default {
     data () {
       return {
+        page: 1,
+        pageCount: 0,
+                itemsPerPage: 10,
+
         // 비밀번호 일치 유효성 시작
         match: '',
         match2: '',
@@ -193,10 +218,7 @@
           { text: '활동', value: 'from' },
           { text: '결과', value: 'result' },
           { text: '접근 경로', value: 'referrer' },
-          { text: '수정한 문서', value: 'revise' },
-          { text: '접속기기', value: 'device' },  
-          { text: '계정 생성일', value: 'accountCreation' },  
-          { text: '계정 수정일', value: 'accountRevision' },  
+          { text: '수정 메시지', value: 'reviseMassage' }, 
         ],
         messages: [
           // 작성 양식
@@ -206,9 +228,7 @@
           // protocol: '',
           // result: '',
           // referrer: '',
-          // device: '',  
-          // accountCreation: '',
-          // accountRevision: '',
+          // reviseMassage: '',
           // },
           {
           time: new Date().toLocaleString(),
@@ -216,9 +236,7 @@
           protocol: 'localhost:3000',
           result: '로그인 성공',
           referrer: 'https://www.youtube.com/',
-          device: 'mobile',
-          accountCreation: '2021. 7. 31',
-          accountRevision: '2021. 8. 1',
+          reviseMassage: '파일 삭제',
           },
           {
             time: new Date().toLocaleString(),
@@ -226,12 +244,42 @@
             from: '로그인',
             result: '로그인 성공',
             referrer: 'google.com',
-            revise: 'document/file',
+            reviseMassage: '사진 추가',
           },
           {
             time: new Date().toLocaleString(),
             from: '로그인',
             result: '로그인 성공',
+          },
+          {
+            time: new Date().toLocaleString(),
+            from: '로그인',
+            result: '로그인 성공',
+          },
+          {
+            time: new Date().toLocaleString(),
+            from: '로그인',
+            result: '로그인 성공',
+          },
+          {
+            time: new Date().toLocaleString(),
+            from: '로그인',
+            result: '로그인 성공',
+          },
+          {
+            time: new Date().toLocaleString(),
+            from: '로그인',
+            result: '로그인 성공',
+          },
+          {
+            time: new Date().toLocaleString(),
+            from: '로그인',
+            result: '로그인 성공',
+          },
+          {
+            time: new Date().toLocaleString(),
+            from: '로그인',
+            result: '로그인 실패 (192.168.0.1)',
           },
           {
             time: new Date().toLocaleString(),
