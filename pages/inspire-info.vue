@@ -38,6 +38,7 @@
               <v-col cols="12" sm="1">
                 <v-subheader>ID</v-subheader>
               </v-col>
+              
               <v-col cols="12" sm="11">
                 <v-subheader>[ This is user id ]</v-subheader>
               </v-col>
@@ -117,7 +118,7 @@
             bottom
             left
           >
-            수정 사항이 저장되었습니다
+            수정 내용이 저장되었습니다
           </v-snackbar>
         </v-card>
       </v-col>
@@ -165,16 +166,14 @@
         활동 로그
       </v-card-title>
       <v-data-table
-        dense
         :headers="headers"
         :items="messages"
-              :page.sync="page"
-
+        :page.sync="page"
         item-key="from"
-      :items-per-page="itemsPerPage"
-      hide-default-footer
-      class="elevation-1"
-      @page-count="pageCount = $event"
+        :items-per-page="itemsPerPage"
+        hide-default-footer
+        class="elevation-1"
+        @page-count="pageCount = $event"
       ></v-data-table>
       <div class="text-center pt-2">
       <v-pagination
@@ -193,8 +192,7 @@
       return {
         page: 1,
         pageCount: 0,
-                itemsPerPage: 10,
-
+        itemsPerPage: 10,
         // 비밀번호 일치 유효성 시작
         match: '',
         match2: '',
