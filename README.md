@@ -1,24 +1,29 @@
 # file-management-system
-
+> Light, Modern, Progresive ERP System.   
+> NuxtJS Front-End.   
+> Vuetify Design Framework.   
+> phpExpress Back-End.   
+> phpSequelize ORM.
 ## Build Setup
 
 ```bash
 # install dependencies
 $ yarn install
 
-# serve with hot reload at localhost:3000
+# serve with front hot reload at localhost:3000
 $ yarn dev
 
-# build for production and launch server
-$ yarn build
-$ yarn start
-
 # generate static project
+$ yarn build
 $ yarn generate
+
+# serve with back hot reload at localhost:4000
+$ yarn back
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
+***
 ## Special Directories
 
 You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
@@ -62,8 +67,33 @@ Example: `/static/robots.txt` is mapped as `/robots.txt`.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
 
+### `static/api`
+
+This directory contains your restAPI for php files. Can write code php7 likes Nodejs Express style, Sequelize.
+
+More information about the usage of this directory in [the documentation](https://github.com/devxian96/phpExpress).
+
+
 ### `store`
 
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+***
+## CodeStyle
+
+### `commitlint`
+```
+feat        A new feature.
+fix         A bug fix.
+doc         Documentation only changes.
+style       Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc).
+refactor    A code  change that neither fixes a bug nor adds a feature.
+test         Adding missing tests or correcting existing ones.
+chore       Changes to the build process or auxiliary tools and libraries such as documentation generation.
+perf        A code change that improves performance.
+ci          Changes to your CI configuration files and scripts.
+build       Changes that affect the build system or external dependencies (example scopes: gulp, broccli, npm).
+temp        Temporary commit that wont`t be included in your CHANGELOG.
+```
