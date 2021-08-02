@@ -21,7 +21,7 @@ $ yarn generate
 $ yarn back
 ```
 
-작동 방식에 대한 자세한 설명은 [문서]](https://nuxtjs.org)을 참조하십시오.
+작동 방식에 대한 자세한 설명은 [문서](https://nuxtjs.org)을 참조하십시오.
 
 ***
 ## 특수 디렉토리
