@@ -4,23 +4,28 @@ define("_ERP_", true);
 
 require './lib/phpExpress.php';
 require './lib/phpSequelize.php';
+require './config.php';
 
 $app = new phpExpress();
 $sql = new phpSequelize($host, $user, $pass, $dbname);
 
-// Request : http://localhost:3000/example/get.test.php/text
-// Result : phpExpress
-$app->get('/text', static function ($req, $res) {
+/*
+Request : http://localhost:3000/example/get.test.php/text
+Result : phpExpress
+ */
+$app->post('/login', static function ($req, $res) {
     try {
         // get login info
-        $login = $sql->findOne('users', (object) [
-            'attributes' => ['password', 'blocked', 'HWID'],
-            'where' => (object) [
-                'username' => $reqUsername,
-            ],
-        ]);
+        $res->send($req['password']);
+    } catch (Exception $e) {
+        http_response_code(500);
+        $res->send($e);
+    }
+});
 
-        $res->send("phpExpress");
+$app->post('/register', static function ($req, $res) {
+    try {
+        $res->status()->send('hi');
     } catch (Exception $e) {
         http_response_code(500);
         $res->send($e);

@@ -9,7 +9,13 @@ class phpSequelize
     public function __construct($host, $user, $pass, $dbname)
     {
         //SQL Connection
-        $this->sqla = sql_connect($host, $user, $pass, $dbname);
+        $this->sqla = mysqli_connect($host, $user, $pass, $dbname);
+        if (!$this->sqla) {
+            echo "Error: Unable to connect to MySQL." . $db . '<br/>';
+            echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL . '<br/>';
+            echo "Debugging error: " . mysqli_connect_error() . PHP_EOL . '<br/>';
+            exit;
+        }
     }
 
     public static function options($options, $noCount = true)

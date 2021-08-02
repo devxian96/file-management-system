@@ -7,6 +7,7 @@
 class phpExpress
 {
     private $req;
+    public $status;
     public function __construct()
     {
         // Header Setting
@@ -33,6 +34,31 @@ class phpExpress
         $this->req = array_merge((array) $_GET, (array) $this->req);
         //POST data
         $this->req = array_merge((array) $_POST, (array) $this->req);
+
+        // inner class
+        $this->status = new class
+
+        {
+            private $code;
+            public function __construct()
+            {
+                echo '---{';
+                echo $code;
+                echo '}---';
+                // if status is null then return 200
+                if (!$code) {
+                    $this->code = 200;
+                } else {
+                    $this->code = $code;
+                }
+            }
+
+            public static function send($result, bool $cache = false)
+            {
+                http_response_code($this->code);
+                parent::send($result, $cache);
+            }
+        };
     }
 
     public static function send($result, bool $cache = false)
