@@ -18,46 +18,27 @@
     <v-simple-table>
       <template #default>
         <thead>
-          <!-- 테이블 헤더 추가 시작 -->
+          <!-- 테이블 헤더 시작 -->
           <!-- 기존에 ID를 name 태그로 정했기에
           실제 ID목록을 name태그로, 실명 목록을 realname태그로 지정 -->
           <tr>
-            <!-- 체크박스 임시 제거
-            <th>
-              <v-checkbox
-                v-model="checkbox"
-                :label="`Checkbox 1: ${checkbox.toString()}`"
-              ></v-checkbox>
-            </th> -->
             <th class="text-name">ID</th>
             <th class="text-realName">이름</th>
             <th class="text-division">부서</th>
             <th class="text-position">직책</th>
             <th class="text-level">권한</th>
-            <th class="text-protocol">IP</th>
-            <th class="text-log">접속기록</th>
             <th class="text-modify">수정</th>
-            <!-- <th class="text-delete">삭제</th> -->
           </tr>
-          <!-- 테이블 헤더 추가 종료-->
+          <!-- 테이블 헤더 종료-->
         </thead>
         <tbody>
           <tr v-for="item in desserts" :key="item.name">
-
-            <!-- 표 데이터 추가 시작 -->
-            <!-- <td>
-              <v-checkbox
-                v-model="checkbox"
-                :label="`Checkbox 1: ${checkbox.toString()}`"
-              ></v-checkbox>
-            </td> -->
+            <!-- 표 데이터 시작 -->
             <td class="text-name">{{ item.name }}</td>
             <td class="text-realName">{{ item.realName }}</td>
             <td class="text-division">{{ item.division }}</td>
             <td class="text-position">{{ item.position }}</td>
             <td class="text-level">{{ item.level }}</td>
-            <td class="text-protocol">{{ item.protocol }}</td>
-            <td class="text-right">{{ item.date }}</td>
             <td class="text-modify">
               <v-btn 
                 color="primary"
@@ -67,13 +48,13 @@
                   )
                 "
               >
-              수정
+                수정
               </v-btn>
-              <!-- </td> -->
-              <!-- <td class="text-delete"> -->
-              <v-btn color="error"> 제거 </v-btn>
+              <v-btn color="error">
+                삭제
+              </v-btn>
             </td>
-            <!-- 표 데이터 추가 종료-->
+            <!-- 표 데이터 종료-->
           </tr>
         </tbody>
       </template>
@@ -114,45 +95,48 @@
         >
         <v-card-text class="mt-5">
         <v-row>
-          <v-col cols="12" sm="6">
-            <v-text-field label="ID" filled class="mt-5" />
+          <v-col cols="12" sm="12">
+            <v-text-field label="ID" filled dense class="mt-5" />
           </v-col>
 
           <v-col cols="12" sm="6">
-            <v-text-field label="비밀번호" filled />
+            <v-text-field
+            v-model="match"
+            label="비밀번호"
+            filled
+            dense/>
+          </v-col>
+          <!-- 비밀번호 일치 유효성 검사 적용 -->
+          <v-col cols="12" sm="6">
+            <v-text-field
+            v-model="match2"
+            :rules="rules"
+            label="비밀번호 확인"
+            filled
+            dense/>
           </v-col>
 
           <v-col cols="12" sm="6">
-            <v-text-field label="이름" filled />
+            <v-text-field label="이름" filled dense/>
           </v-col>
 
           <v-col cols="12" sm="6">
-            <v-text-field label="전화번호" filled />
-          </v-col>
-
-          <v-col cols="12" sm="6">
-            <v-text-field label="부서" filled />
+            <v-text-field label="부서" filled dense/>
           </v-col>
 
           <v-col cols="12" sm="6">  
-            <v-text-field label="직책" filled />
-          </v-col>
-          
-          <v-col cols="12" sm="6">
-            <v-text-field label="IP" filled />
+            <v-text-field label="직책" filled dense/>
           </v-col>
 
           <v-col cols="12" sm="6">
-            <v-overflow-btn
-              class="mb-6 mt-0"
-              :items="['1', '2', '3', '4']"
+            <v-autocomplete
+              :items="states"
+              :filter="customFilter"
+              item-text="name" 
               label="권한"
               filled
-            ></v-overflow-btn>
-          </v-col>
-          
-          <v-col cols="8" sm="12">
-            <v-text-field label="설명" filled />
+              dense
+            ></v-autocomplete>
           </v-col>
         </v-row>
         </v-card-text>
@@ -174,80 +158,83 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      // 추가한 스크립트
-      checkbox: true,
-      // 추가한 스크립트
-      openWrite: false,
-      page: 1,
-      desserts: [
-        //   작성양식
-        //   {
-        //   name: ,
-        //   date: new Date().toLocaleString(),
-        //   realName: ,
-        //   phoneNumber: ,
-        //   division: ,
-        //   position: ,
-        //   level: ,
-        //   protocol: ,
-        // },
-        {
-          name: 'Frozen Yogurt',
-          date: new Date().toLocaleString(),
-          realName: '김씨',
-          division: '기획부',
-          position: '부장',
-          level: 'admin',
-          protocol: 'localhost: 3000',
-        },
-        {
-          name: 'Ice cream sandwich',
-          date: new Date().toLocaleString(),
-          realName: '장씨',
-          division: '개발부',
-          position: '사원',
-          level: 'user',
-          protocol: 'localhost: 8000',
+  export default {
+    data() {
+      return {
+        dialog: false,
+        openWrite: false,
+        page: 1,
+        // 비밀번호 일치 유효성 시작
+        match: '',
+        match2: '',
+        // 비밀번호 일치 유효성 종료
+        desserts: [
+          //   작성양식
+          //   {
+          //   name: ,
+          //   realName: ,
+          //   division: ,
+          //   position: ,
+          //   level: ,
+          // },
+          {
+            name: 'Frozen Yogurt',
+            realName: '김씨',
+            division: '기획부',
+            position: '부장',
+            level: 'admin',
+          },
+          {
+            name: 'Ice cream sandwich',
+            realName: '장씨',
+            division: '개발부',
+            position: '사원',
+            level: 'user',
+          },
+          {
+            name: 'Eclair',          
+          },
+          {
+            name: 'Cupcake',
+            position: '사장',
+          },
+          {
+            name: 'Gingerbread',
+          },
+          {
+            name: 'Jelly bean',
+          },
+          {
+            name: 'Lollipop',
+          },
+          {
+            name: 'Honeycomb',
+          },
+          {
+            name: 'Donut',
+          },
+          {
+            name: 'KitKat',
+          },
+        ],
+      }
+    },
+    // 비밀번호 일치 유효성 시작
+    computed: {
+      rules () {
+        const rules = []
 
-        },
-        {
-          name: 'Eclair',
-          date: new Date().toLocaleString(),          
-        },
-        {
-          name: 'Cupcake',
-          date: new Date().toLocaleString(),
-          position: '사장',
-        },
-        {
-          name: 'Gingerbread',
-          date: new Date().toLocaleString(),
-        },
-        {
-          name: 'Jelly bean',
-          date: new Date().toLocaleString(),
-        },
-        {
-          name: 'Lollipop',
-          date: new Date().toLocaleString(),
-        },
-        {
-          name: 'Honeycomb',
-          date: new Date().toLocaleString(),
-        },
-        {
-          name: 'Donut',
-          date: new Date().toLocaleString(),
-        },
-        {
-          name: 'KitKat',
-          date: new Date().toLocaleString(),
-        },
-      ],
-    }
-  },
-}
+        if (this.match) {
+          const rule =
+            v => (!!v && v) === this.match ||
+              '비밀번호가 일치하지 않습니다'
+
+          rules.push(rule)
+        }
+
+        return rules
+      },
+    },
+    // 비밀번호 일치 유효성 종료
+  }
 </script>
